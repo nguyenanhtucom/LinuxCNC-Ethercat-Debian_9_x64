@@ -15,7 +15,7 @@ $ git clone https://github.com/sittner/linuxcnc-ethercat.git
 
 $ git clone https://github.com/sittner/ec-debianize.git
 
-# 1. Install linuxcnc
+# 1. Build linuxcnc
 
 $ cd linuxcnc/debian
 
@@ -41,7 +41,7 @@ $. ../scripts/rip-environment (to linuxcnc/src)
 
 $linuxcnc
 
-# 2. Install ec-debianize
+# 2. Build ec-debianize
 
 $ sudo apt-get install quilt (dependency for ec-debianize)
 
@@ -73,7 +73,7 @@ $ ip link show (output = link/ether ....)
 	
 $ sudo update-ethercat-config (reboot, or restart your pc)
 
-# 3. Install linuxcnc-ethercat
+# 3. Build linuxcnc-ethercat
 
 $ cd linuxcnc-ethercat
 
@@ -107,26 +107,51 @@ $ sudo nano ethercat-conf.xml
 
 $ halrun
 	show pin
+	
 	loadrt trivkins
+	
 	loadrt motmod servo_period_nsec=1000000 num_joints=3
+	
 	loadusr -W lcec_conf ethercat-conf.xml
+	
 	loadrt lcec
+	
 	addf lcec.read-all servo-thread
+	
 	addf lcec.write-all servo-thread
+	
 	setp lcec.0.D2.dout-0 1
+	
 	start
+	
 # 5. Test 2
+
 Create file test.hal
+
 $ sudo nano test.hal
+
 	show pin
+	
 	loadrt trivkins
+	
 	loadrt motmod servo_period_nsec=1000000 num_joints=3
+	
 	loadusr -W lcec_conf ethercat-conf.xml
+	
 	loadrt lcec
+	
 	addf lcec.read-all servo-thread
+	
 	addf lcec.write-all servo-thread
+	
 	start
 
 $halrun -I test.hal
 
 	setp lcec.0.D2.dout-0 1
+# 6. Error
+
+	/dev/EtherCAT0: Permission denied
+	
+	$sudo chmod 7777 /dev/EtherCAT0
+
