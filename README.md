@@ -15,7 +15,7 @@ $ git clone https://github.com/sittner/linuxcnc-ethercat.git
 
 $ git clone https://github.com/sittner/ec-debianize.git
 
-#1. Install linuxcnc
+# 1. Install linuxcnc
 
 $ cd linuxcnc/debian
 
@@ -33,11 +33,15 @@ $ ./autogen.sh
 
 $ ./configure
 
-$ make -j2 ( j2 = dual processor speed )
+$ make -j4 ( j2 = dual processor speed )
 
 $ sudo make setuid
 
-2. Install ec-debianize
+$. ../scripts/rip-environment (to linuxcnc/src)
+
+$linuxcnc
+
+# 2. Install ec-debianize
 
 $ sudo apt-get install quilt (dependency for ec-debianize)
 
@@ -69,21 +73,30 @@ $ ip link show (output = link/ether ....)
 	
 $ sudo update-ethercat-config (reboot, or restart your pc)
 
-3. Install linuxcnc-ethercat
+# 3. Install linuxcnc-ethercat
+
 $ cd linuxcnc-ethercat
+
 $ sudo make
+
 $ sudo make install
 
-4. To start linuxcnc with ethercat, start linuxcnc with simple axis gui.
 copy lcec_conf to your linuxcnc sim map (copy it where your ini files is)
+
 $ cp linuxcnc-ethercat/src/lcec_conf  ...
+
 copy lcec_so to linuxcnc/rtlib
+
 $ cp linuxcnc-ethercat/src/lcec.so linuxcnc/rtlib
-5. Test
+
+# 4. Test 1
+
 List slave
+
 $ ethercat slaves
 
 Create file ethercat-conf.xml
+
 $ sudo nano ethercat-conf.xml
 	<masters>  
 	  <master idx="0" appTimePeriod="1000000" refClockSyncCycles="1000">
@@ -102,3 +115,18 @@ $ halrun
 	addf lcec.write-all servo-thread
 	setp lcec.0.D2.dout-0 1
 	start
+# 5. Test 2
+Create file test.hal
+$ sudo nano test.hal
+	show pin
+	loadrt trivkins
+	loadrt motmod servo_period_nsec=1000000 num_joints=3
+	loadusr -W lcec_conf ethercat-conf.xml
+	loadrt lcec
+	addf lcec.read-all servo-thread
+	addf lcec.write-all servo-thread
+	start
+
+$halrun -I test.hal
+
+	setp lcec.0.D2.dout-0 1
