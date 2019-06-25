@@ -1,5 +1,5 @@
 
-Install LinuxCNC from http://www.linuxcnc.org/testing-stretch-rtpreempt/linuxcnc-stretch-uspace-amd64-r13.iso
+Install LinuxCNC 64bit from http://www.linuxcnc.org/testing-stretch-rtpreempt/linuxcnc-stretch-uspace-amd64-r13.iso
 
 Open terminal in your home directory.
 
@@ -11,9 +11,15 @@ $ sudo apt-get install mercurial
 
 $ git clone https://github.com/LinuxCNC/linuxcnc.git
 
+	https://github.com/nguyenanhtucom/LinuxCNC-2.9.git
+
 $ git clone https://github.com/sittner/linuxcnc-ethercat.git
+	
+	https://github.com/nguyenanhtucom/sittner-linuxcnc-ethercat.git
 
 $ git clone https://github.com/sittner/ec-debianize.git
+	
+	https://github.com/nguyenanhtucom/sittner-linuxcnc-ec-debianize.git
 
 # 1. Build linuxcnc
 
