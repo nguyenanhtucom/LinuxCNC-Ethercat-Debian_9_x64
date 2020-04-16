@@ -45,7 +45,7 @@ $linuxcnc
 
 # 2. Build IgH-EtherCAT-Master_Debian-9x64
 
-https://github.com/nguyenanhtucom/IgH-EtherCAT-Master_Debian-9x64
+	https://github.com/nguyenanhtucom/IgH-EtherCAT-Master_Debian-9x64
 
 # 3. Build linuxcnc-ethercat
 
