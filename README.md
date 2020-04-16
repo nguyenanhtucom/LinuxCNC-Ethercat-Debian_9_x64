@@ -47,7 +47,7 @@ $linuxcnc
 
 	https://github.com/nguyenanhtucom/IgH-EtherCAT-Master_Debian-9x64
 
-# 3. Build linuxcnc-ethercat
+# 3. Build linuxcnc-ethercat (LinuxCNC EtherCAT HAL driver)
 
 $ cd linuxcnc-ethercat
 
