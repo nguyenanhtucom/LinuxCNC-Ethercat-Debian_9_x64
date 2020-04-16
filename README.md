@@ -47,47 +47,9 @@ $. ../scripts/rip-environment (to linuxcnc/src)
 
 $linuxcnc
 
-# 2. Build ec-debianize
+# 2. Build IgH-EtherCAT-Master_Debian-9x64
 
-$ sudo apt-get install quilt (dependency for ec-debianize)
-
-$ cd ec-debianize
-
-$ ./get_sourse.sh
-
-$ cd etherlabmaster
-
-$ dpkg-buildpackage (dpkg-checkbuilddeps optional)
-
-(the output error "failed to sign .dsc file is no issue)
-
-$ cd .. (to ec-debianize$)
-
-$ sudo dpkg -i etherlabmaster_1.5.2+20180317hg9e65f7-2_amd64.deb
-
-$ sudo dpkg -i etherlabmaster-dev_1.5.2+201803a17hg9e65f7-2_amd64.deb
-
-$ sudo nano /etc/default/ethercat
-
-Find your mac address:
-
-$ ip link show (output = link/ether ....)
-
-	Type in MASTER0_DEVICE="e8:40:f2:3e:73:b4"
-	
-	Type in DEVICE_MODULES="generic"
-
-To run the service without root (/dev/EtherCAT0: Permission denied), a rule file has to be edit
-
-$cd /etc/udev/rules.d/
-
-$ sudo nano 98-EtherCAT.rules
-
-GROUP="ethercat" to GROUP="users"
-
-	KERNEL=="EtherCAT[0-9]*", MODE="0664" , GROUP="users"
-
-$ sudo update-ethercat-config (reboot, or restart your pc)
+https://github.com/nguyenanhtucom/IgH-EtherCAT-Master_Debian-9x64
 
 # 3. Build linuxcnc-ethercat
 
