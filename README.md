@@ -17,10 +17,6 @@ $ git clone https://github.com/sittner/linuxcnc-ethercat.git
 	
 	https://github.com/nguyenanhtucom/sittner-linuxcnc-ethercat.git
 
-$ git clone https://github.com/sittner/ec-debianize.git
-	
-	https://github.com/nguyenanhtucom/sittner-linuxcnc-ec-debianize.git
-
 # 1. Build linuxcnc
 
 $ cd linuxcnc/debian
